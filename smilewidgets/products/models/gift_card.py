@@ -2,6 +2,9 @@ from django.db import models
 
 
 class GiftCard(models.Model):
+    """Creates a gift card to be used for the purchase of a widget
+    """
+
     code = models.CharField(
         max_length=30, help_text='Internal facing reference to product')
     amount = models.PositiveIntegerField(
