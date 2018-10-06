@@ -16,10 +16,6 @@ class ProductTest(TestCase):
             'name': 'Big Widget',
             'code': 'big_widget'
         }
-        self.serializer_data = {
-            'name': 'Small Widget',
-            'code': 'sm_widget'
-        }
 
         self.product = Product.objects.create(**self.product_attributes)
         self.serializer = ProductSerializer(instance=self.product)

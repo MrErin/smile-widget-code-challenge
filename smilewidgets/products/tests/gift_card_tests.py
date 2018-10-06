@@ -1,7 +1,7 @@
-from django.test import TestCase
-import products.models
-import products.serializers
-from products import models, serializers
+from django.http import JsonResponse
+from django.test import TestCase, Client
+from django.urls import reverse
+from rest_framework.test import APIClient
 from products.models import GiftCard
 from products.serializers import GiftCardSerializer
 
@@ -12,17 +12,13 @@ class GiftCardTest(TestCase):
     def setUp(self):
         """Test case setup"""
 
+        self.client = APIClient()
+
         self.gift_card_attributes = {
             'code': '10OFF',
             'amount': 1000,
             'date_start': '2018-01-01',
             'date_end': '2019-01-01'
-        }
-        self.serializer_data = {
-            'code': '30OFF',
-            'amount': 3000,
-            'date_start': '2018-01-01',
-            'date_end': ''
         }
 
         self.gift_card = GiftCard.objects.create(**self.gift_card_attributes)

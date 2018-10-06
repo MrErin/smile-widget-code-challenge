@@ -18,12 +18,6 @@ class ProductPriceTest(TestCase):
             'price_start_date': '2018-01-01',
             'price_end_date': '2018-12-31'
         }
-        self.serializer_data = {
-            'code': 'big_widget',
-            'price': 100000,
-            'price_start_date': '2018-01-01',
-            'price_end_date': '2018-12-31'
-        }
 
         self.product_price = ProductPrice.objects.create(
             **self.product_price_attributes)
