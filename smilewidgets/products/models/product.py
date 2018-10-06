@@ -7,7 +7,7 @@ class Product(models.Model):
         max_length=25, help_text='Customer facing name of product')
     code = models.CharField(
         max_length=10, help_text='Internal facing reference to product')
-    price = models.PositiveIntegerField(help_text='Price of product in cents')
+    # removing the "price" field from this model because prices are now managed on the ProductPrice table.
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.code)
