@@ -1,3 +1,4 @@
 from .gift_card_serializer import GiftCardSerializer
 from .product_price_serializer import ProductPriceSerializer
 from .product_serializer import ProductSerializer
+from .price_request_serializer import PriceRequestSerializer
