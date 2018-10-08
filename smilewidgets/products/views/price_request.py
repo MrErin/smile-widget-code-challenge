@@ -2,7 +2,6 @@ import datetime
 from django.forms.models import model_to_dict
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from products.serializers import PriceRequestSerializer
 from products.models import GiftCard, Product, ProductPrice
 
 
@@ -20,7 +19,6 @@ class PriceRequestView(APIView):
             'giftCardCode': '',
             'productName': '',
             'productPrice': ''
-
         }
 
         # ensure the product is in the database
@@ -63,8 +61,6 @@ class PriceRequestView(APIView):
 
     def validate_date(self, date):
         """Checks that the date is correctly formatted"""
-
-        year, month, day = date.split('-')
 
         try:
             datetime.datetime.strptime(date, '%Y-%m-%d')

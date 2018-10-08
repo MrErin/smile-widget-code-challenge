@@ -1,7 +1,4 @@
-from django.http import JsonResponse
-from django.test import TestCase, Client
-from django.urls import reverse
-from rest_framework.test import APIClient
+from django.test import TestCase
 from products.models import GiftCard
 from products.serializers import GiftCardSerializer
 
@@ -11,8 +8,6 @@ class GiftCardTest(TestCase):
 
     def setUp(self):
         """Test case setup"""
-
-        self.client = APIClient()
 
         self.gift_card_attributes = {
             'code': '10OFF',

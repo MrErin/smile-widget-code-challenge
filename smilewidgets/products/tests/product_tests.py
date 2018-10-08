@@ -1,7 +1,4 @@
 from django.test import TestCase
-import products.models
-import products.serializers
-from products import models, serializers
 from products.models import Product
 from products.serializers import ProductSerializer
 

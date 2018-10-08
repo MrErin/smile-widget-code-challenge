@@ -2,10 +2,27 @@
 
 The Smile Widget Company currently sells two types of smile widgets: a Big Widget and a Small Widget.  We'd like to add more flexibility to our product pricing.
 
-## Setup with Docker
-1. Install Docker (https://docs.docker.com/install/)
-2. Fork this repository.
-3. `>>> docker-compose up --build`
+## To Browse API
+
+1. Terminal: ```python manage.py runserver```
+1. Browser: ```http://127.0.0.1:8000/api/```
+
+### To Get Prices
+
+Add parameters to the URL in the following format:
+
+```sh
+# <API root>/get-price/<productCode>&<date in YYYY-MM-DD format>&<giftCardCode>/
+# giftCardCode is optional
+
+# example:
+http://127.0.0.1:8000/api/get-price/big_widget&2019-11-27&10OFF/
+
+```
+
+## To Run Tests
+
+```pyman test products```
 
 ## Setup without Docker
 1. Install Python (>3.4)
