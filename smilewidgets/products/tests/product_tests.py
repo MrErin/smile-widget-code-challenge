@@ -1,6 +1,8 @@
 from django.test import TestCase
+from rest_framework.test import APIRequestFactory
 from products.models import Product
 from products.serializers import ProductSerializer
+from products.views import ProductViewSet
 
 
 class ProductTest(TestCase):
@@ -43,3 +45,23 @@ class ProductTest(TestCase):
         data = self.serializer.data
 
         self.assertEqual(data['code'], self.product_attributes['code'])
+
+    def test_model_can_crete_product(self):
+        """Ensure the model will create a new entry in the table"""
+
+        self.test_product = Product(
+            code='widget', name='Widget')
+
+        old_count = Product.objects.count()
+        self.test_product.save()
+        new_count = Product.objects.count()
+        self.assertEqual(new_count, (old_count + 1))
+
+    def test_product_price_view_set(self):
+        request = APIRequestFactory().get('')
+        product_detail = ProductViewSet.as_view({'get': 'retrieve'})
+        p = Product.objects.create(
+            code='widget', name='Widget')
+        response = product_detail(request, pk=p.pk)
+
+        self.assertEqual(response.status_code, 200)

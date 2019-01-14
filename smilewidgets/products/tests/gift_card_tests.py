@@ -1,6 +1,8 @@
 from django.test import TestCase
+from rest_framework.test import APIRequestFactory
 from products.models import GiftCard
 from products.serializers import GiftCardSerializer
+from products.views import GiftCardViewSet
 
 
 class GiftCardTest(TestCase):
@@ -61,3 +63,23 @@ class GiftCardTest(TestCase):
 
         self.assertEqual(data['date_end'],
                          self.gift_card_attributes['date_end'])
+
+    def test_model_can_crete_gift_card(self):
+        """Ensure the model will create a new entry in the table"""
+
+        self.test_gift_card = GiftCard(
+            code='500OFF-FAKE', amount=50000, date_start='2018-01-01', date_end='2018-12-31')
+
+        old_count = GiftCard.objects.count()
+        self.test_gift_card.save()
+        new_count = GiftCard.objects.count()
+        self.assertEqual(new_count, (old_count + 1))
+
+    def test_gift_card_view_set(self):
+        request = APIRequestFactory().get('')
+        gift_card_detail = GiftCardViewSet.as_view({'get': 'retrieve'})
+        gc = GiftCard.objects.create(
+            code='500OFF-FAKE', amount=50000, date_start='2018-01-01', date_end='2018-12-31')
+        response = gift_card_detail(request, pk=gc.pk)
+
+        self.assertEqual(response.status_code, 200)
